@@ -8,7 +8,9 @@ defmodule Peripherals.Joystick do
   @impl GenServer
   def init(_) do
     {:ok, js} = Joystick.start_link(0, self())
-    Logger.debug("joystick: #{inspect(Joystick.info(js))}")
+    js_info = Joystick.info(js)
+    Logger.debug("joystick: #{inspect(js_info)}")
+    Logger.debug("num axes/buttons: #{js_info.axes}/#{js_info.buttons}")
     {:ok, %{joystick: js}}
   end
 
